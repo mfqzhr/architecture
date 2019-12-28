@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加用户</title>
+</head>
+<body>
+<span th:text="${session.msg}"></span>
+<form action="/addUser" method="post">
+    <table border="1">
+        <tr>
+            <td>姓名</td>
+            <td><input type="text" name="name"></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td>
+                <input type="radio" name="sex" value=男>男
+                <input type="radio" name="sex" value="女">女
+            </td>
+        </tr>
+        <tr>
+            <td>手机号</td>
+            <td><input type="text" name="phone"></td>
+        </tr>
+        <tr>
+            <td>身份证</td>
+            <td><input type="text" name="card"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="提交">
+            </td>
+        </tr>
+    </table>
+
+</form>
+</body>
+</html>

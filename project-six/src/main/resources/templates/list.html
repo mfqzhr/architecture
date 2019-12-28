@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list</title>
+</head>
+<body>
+<table>
+    <table border="1">
+        <tr th:each="item : ${list}">
+            <td th:text="${item.getName()}"></td>
+            <td th:text="${item.getSex()}"></td>
+            <td th:text="${item.getPhone()}"></td>
+            <td th:text="${item.getCard()}"></td>
+        </tr>
+    </table>
+</table>
+
+</body>
+</html>
