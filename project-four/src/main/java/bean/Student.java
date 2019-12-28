@@ -5,24 +5,31 @@ package bean;
  * @date 2019/12/27
  */
 public class Student {
-    private Integer name;
-    private String no;
+    private Integer id;
+    private String name;
     private String gender;
 
-    public Integer getName() {
+
+    public Student(Integer id, String name, String gender) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
     }
 
     public String getGender() {

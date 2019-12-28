@@ -8,26 +8,39 @@ import view.StudentView;
  * @date 2019/12/27
  */
 public class StudentController {
-    private Student student;
-    private StudentView studentView;
+    private Student model;
+    private StudentView view;
 
-    public Student getStudent() {
-        return student;
+    public StudentController(Student model, StudentView view) {
+        this.model = model;
+        this.view = view;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public Integer getStudentId() {
+        return model.getId();
     }
 
-    public StudentView getStudentView() {
-        return studentView;
+    public String getStudentName() {
+        return model.getName();
     }
 
-    public void setStudentView(StudentView studentView) {
-        this.studentView = studentView;
+    public String getStudentGender() {
+        return model.getGender();
+    }
+
+    public void setStudentId(Integer id) {
+        model.setId(id);
+    }
+
+    public void setStudentName(String name) {
+        model.setName(name);
+    }
+
+    public void setStudentGender(String gender) {
+        model.setGender(gender);
     }
 
     public void updateView() {
-
+        view.printStudentDetails(model.getId(), model.getName(), model.getGender());
     }
 }
