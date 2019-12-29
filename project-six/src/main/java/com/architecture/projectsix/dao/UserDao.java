@@ -4,6 +4,7 @@ import com.architecture.projectsix.bean.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.IntSummaryStatistics;
 import java.util.List;
 
 /**
@@ -23,15 +24,22 @@ public class UserDao {
     }
 
     public List<User> findByAll() {
-
         return userList;
     }
+
 
     public void addUser(User user) {
         userList.add(user);
     }
 
+    /**
+     * 由于手机号和身份证都是唯一的,判断是否和数据库中有重复
+     *
+     * @param phone 手机号
+     * @param card  身份证
+     * @return
+     */
     public User findByPhoneAndCard(String phone, String card) {
-        return userList.stream().filter(user -> user.getPhone().equals(phone)|| user.getCard().equals(card)).findFirst().orElse(null);
+        return userList.stream().filter(user -> user.getPhone().equals(phone) || user.getCard().equals(card)).findFirst().orElse(null);
     }
 }

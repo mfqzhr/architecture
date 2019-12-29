@@ -37,21 +37,29 @@ public class MyConfig implements WebMvcConfigurer {
             public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
                 String msg = "";
                 String name = request.getParameter("name");
+                System.out.println();
                 String sex = request.getParameter("sex");
                 String phone = request.getParameter("phone");
                 String card = request.getParameter("card");
-                String cardPattern =
-                        "(^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|" +
-                                "(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}$)";
-                if (!phone.matches("^1(3|4|5|6|7|8|9)\\d{9}$")) {
-                    msg = "手机号不正确";
-                } else if (!Pattern.matches(cardPattern, card)) {
-                    msg = "身份证不正确";
-                } else if (!Pattern.matches("^([\\u4e00-\\u9fa5]{1,20}|[a-zA-Z\\.\\s]{1,20})$", name)) {
-                    msg = "姓名不合法";
-                } else if (userDao.findByPhoneAndCard(phone, card) != null) {
-                    msg = "身份证或者手机号不合法";
+                if ("".equals(name) || "".equals(phone) || "".equals(card)) {
+                    msg = "输入不能为空";
                 } else {
+                    String cardPattern =
+                            "(^[1-9]\\d{5}(18|19|20)\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|" +
+                                    "(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}$)";
+                    if (!name.matches("^([\\u4e00-\\u9fa5]{1,20}|[a-zA-Z\\.\\s]{1,20})$")) {
+                        msg += "姓名不合法 ";
+
+                    } else if (!phone.matches("^1(3|4|5|6|7|8|9)\\d{9}$")) {
+                        msg += "手机号格式不正确 ";
+                    } else if (!card.matches(cardPattern)) {
+                        msg += "身份证格式不正确 ";
+                    } else if (userDao.findByPhoneAndCard(phone, card) != null) {
+                        msg += "手机号或身份证已经存在数据库 ";
+                    }
+
+                }
+                if ("".equals(msg)) {
                     request.getSession().setAttribute("msg", "");
                     return true;
                 }
